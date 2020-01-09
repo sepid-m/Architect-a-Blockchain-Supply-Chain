@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair Trade Milk</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>Fair Trade Milk</h1>
+        <p>Prove the authenticity of milk using the Ethereum blockchain.</p> 
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <h2>Admistration Panel</h2>
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Roles</label>
+                                <div class="col-sm-9">
+                                    <select class="Poulterer-select" id="rolesSelectBox">
+                                        <option value="poulterer">Poulterer</option>
+                                        <option value="dairyfactory">Dairyfactory</option>
+                                        <option value="distributor">Distributor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="roleAccountAddress" name="roleAccountAddress" placeholder="0x963865f57804b38459dd4b2da2f760211a200438" size="50">
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                    <div class="card-footer">
+                        <button class="btn-addRole" id="button" type="button" data-id="1">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <h2>Milk Fetch Data</h2>
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="upcFetchItem" class="col-sm-3 col-form-label">UPC</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="upcFetchItem" name="upcFetchItem" placeholder=1 step="1" pattern="\d+" required>
+                                </div>
+                            </div>
+                            <div class="form-group row table-responsive" id="search-table" style="display:none;">
+								<table class="table">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">UPC</th>
+											<th scope="col">SKU</th>
+                                            <th scope="col">Price (Eth)</th>
+                                            <th scope="col">State</th>
+											<th scope="col">Owner Id</th>
+											<th scope="col">Poulterer Id</th>
+											<th scope="col">Poulterer Name</th>
+                                            <th scope="col">Dairyfactory Id</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td id="result-upc"></td>
+											<td id="result-sku"></td>
+                                            <td id="result-price"></td>
+                                            <td id="result-item-state"></td>
+											<td id="result-owner-id"></td>
+											<td id="result-poulterer-id"></td>
+											<td id="result-poulterer-name"></td>
+                                            <td id="result-distributor-id"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+                        </form>
+                    </div> 
+                    <div class="card-footer">
+                        <button class="btn-addRole" id="button" type="button" data-id="3">Fetch Data</button>
+                        <div class="alert alert-danger" id="fetch-data-not-found" role="alert" style="display:none;">Item not found</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">Poulterer Panel</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="upcObtainItem" class="col-sm-3 col-form-label">UPC</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="upcObtainItem" name="upcObtainItem" placeholder=1 step="1" pattern="\d+">
+                                </div>
+                                <label for="originFarmName" class="col-sm-3 col-form-label">Poulterer Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="originFarmName" name="originFarmName" placeholder="Mihan Dairy">
+                                </div>
+                                <label for="originFarmInformation" class="col-sm-3 col-form-label">Poulterer Information</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="originFarmInformation" name="originFarmInformation" placeholder="A factory that try to produce fresh and organic milk!">
+                                </div>
+                                <label for="originFarmLatitude" class="col-sm-3 col-form-label">Poulterer Latitude</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="originFarmLatitude" name="originFarmLatitude" placeholder="47.568074">
+                                </div>
+                                <label for="originFarmLongitude" class="col-sm-3 col-form-label">Poulterer Longitude</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="originFarmLongitude" name="originFarmLongitude" placeholder="7.801999">
+                                </div>
+                                <label for="productNotes" class="col-sm-3 col-form-label">Poulterer Notes</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="productNotes" name="productNotes" placeholder="Fresh and organic milk.">
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                    <div class="card-footer">
+                        <button class="btn-addRole" id="button" type="button" data-id="2">Obtain Milk</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="upcPoultererChangeState" class="col-sm-3 col-form-label">UPC</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="upcPoultererChangeState" name="upcPoultererChangeState" placeholder=1 step="1" pattern="\d+"><br>
+                                </div>
+                                <label for="pricePoulterer" class="col-sm-3 col-form-label">Price (Eth)</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="pricePoulterer" name="pricePoulterer" placeholder=1 step="any" pattern="\d+"><br>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                    <div class="card-footer">
+                        <button class="btn-store-item" id="button" type="button" data-id="4">Store Milk</button>
+                        <button class="btn-sell-item" id="button" type="button" data-id="5">Sell Milk</button>
+                        <button class="btn-ship-item" id="button" type="button" data-id="6">Ship Milk</button>
+                        <div class="alert alert-success" id="alert-poulterer-success" role="alert" style="display:none;"></div>
+                        <div class="alert alert-danger" id="alert-poulterer-error" role="alert" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h2>Dairyfactory Panel</h2>
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="upcDairyfactoryChangeState" class="col-sm-3 col-form-label">UPC</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="upcDairyfactoryChangeState" name="upcDairyfactoryChangeState" placeholder=1 step="1" pattern="\d+"><br>
+                                </div>
+                                <label for="priceDairyfactory" class="col-sm-3 col-form-label">Price (Eth)</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="priceDairyfactory" name="priceDairyfactory" placeholder=1 step="any" pattern="\d+"><br>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                    <div class="card-footer">
+                        <button class="btn-buy-dairyfactory-item" id="button" type="button" data-id="7">Buy</button>
+                        <button class="btn-receive-dairyfactory-item" id="button" type="button" data-id="9">Received</button>
+                        <button class="btn-process-dairyfactory-item" id="button" type="button" data-id="10">Process</button>
+                        <button class="btn-pack-dairyfactory-item" id="button" type="button" data-id="11">Pack</button>
+                        <button class="btn-sell-dairyfactory-item" id="button" type="button" data-id="12">Sell</button>
+                        <button class="btn-ship-dairyfactory-item" id="button" type="button" data-id="13">Ship</button>
+                        <div class="alert alert-success" id="alert-dairyfactory-success" role="alert" style="display:none;"></div>
+                        <div class="alert alert-danger" id="alert-dairyfactory-error" role="alert" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h2>Distributor Panel</h2>
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="upcDistributorChangeState" class="col-sm-3 col-form-label">UPC</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="upcDistributorChangeState" name="upcDistributorChangeState" placeholder=1 step="1" pattern="\d+"><br>
+                                </div>
+                                <label for="priceDistributor" class="col-sm-3 col-form-label">Price (Eth)</label>
+                                <div class="col-sm-9">
+                                    <input class="input-field" type="number" id="priceDistributor" name="priceDistributor" placeholder=1 step="any" pattern="\d+"><br>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-buy-Distributor-item" id="button" type="button" data-id="14">Buy</button>
+                        <button class="btn-receive-Distributor-item" id="button" type="button" data-id="15">Received</button>
+                        <div class="alert alert-success" id="alert-Distributor-success" role="alert" style="display:none;"></div>
+                        <div class="alert alert-danger" id="alert-Distributor-error" role="alert" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h2>Transaction History<span id="ftc-history"></span></h2>
+                <div>
+                    <ul id="ftc-events">
+                        <!-- Events will appear here from app.js -->
+                    </ul>
+                    <br>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="src/js/web3_dist/web3.min.js"></script>
+    <script src="src/js/truffle-contract.js"></script>
+    <script src="src/js/app.js"></script>
+</body>
+
+</html>
